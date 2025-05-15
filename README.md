@@ -50,3 +50,8 @@ The **Castor Calculator App** is a Streamlit-based web application that helps us
 4. **Run the app**:
    ```bash
    streamlit run main.py
+
+---
+
+## Example
+![Showcase](results_example.png) - an example to show how the app looks like

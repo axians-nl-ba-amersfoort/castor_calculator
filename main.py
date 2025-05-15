@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
-st.set_page_config(page_title="Castor App", page_icon='logo-castor-inter.png')
+st.set_page_config(page_title="Castor App", page_icon='logo-castor-inter.png', layout="wide")
 
 col1, col2 = st.columns([3, 1])
 with col2:
@@ -59,13 +59,16 @@ total_profit = total_value - AMOUNT
 profit_percentage = (total_profit / AMOUNT) * 100 if AMOUNT > 0 else 0
 
 # --- Display Results ---
-st.write("### Result")
-st.write(f"Paid Stocks: {round(paid_stocks, 1)}")
-st.write(f"Free Stocks: {bonus_stocks}")
-st.write(f"Total Stocks: {round(total_stocks, 1)}")
-st.write(f"Total Investment: €{AMOUNT:.2f}")
-st.write(f"Total Profit: €{total_profit:.2f}")
-st.write(f"Total Profit Percentage: {profit_percentage:.2f}%")
+
+col1, col2 = st.columns([1, 3])
+with col1:
+    st.write("### Result")
+    st.write(f"Paid Stocks: {round(paid_stocks, 1)}")
+    st.write(f"Free Stocks: {bonus_stocks}")
+    st.write(f"Total Stocks: {round(total_stocks, 1)}")
+    st.write(f"Total Investment: €{AMOUNT:.2f}")
+    st.write(f"Total Profit: €{total_profit:.2f}")
+    st.write(f"Total Profit Percentage: {profit_percentage:.2f}%")
 
 # --- Data for Altair Plot ---
 max_paid_stocks = int(AMOUNT // stock_price) + 10
@@ -93,18 +96,20 @@ highlight_df = pd.DataFrame({
 st.markdown("---")
 
 # --- Altair Chart ---
-st.write("### Profit (in €) vs. Paid Stocks (Altair Interactive)")
+with col2:
+    st.write("### Profit (in €) vs. Paid Stocks (Altair Interactive)")
 
-line = alt.Chart(df).mark_line(color='steelblue').encode(
-    x=alt.X('Paid Stocks', title='Number of Paid Stocks'),
-    y=alt.Y('Profit (€)', title='Profit (€)'),
-    tooltip=['Paid Stocks', 'Profit (€)']
-).properties(width=700, height=400)
+    line = alt.Chart(df).mark_line(color='steelblue').encode(
+        x=alt.X('Paid Stocks', title='Number of Paid Stocks'),
+        y=alt.Y('Profit (€)', title='Profit (€)'),
+        tooltip=['Paid Stocks', 'Profit (€)']
+    ).properties(width=700, height=400)
 
-point = alt.Chart(highlight_df).mark_point(color='red', size=100).encode(
-    x='Paid Stocks',
-    y='Profit (€)',
-    tooltip=['Paid Stocks', 'Profit (€)']
-)
+    point = alt.Chart(highlight_df).mark_point(color='red', size=100).encode(
+        x='Paid Stocks',
+        y='Profit (€)',
+        tooltip=['Paid Stocks', 'Profit (€)']
+    )
 
-st.altair_chart(line + point)
+
+    st.altair_chart(line + point)
