@@ -2,7 +2,7 @@
 
 The **Castor Calculator App** is a Streamlit-based web application that helps users **calculate the profit** they can make when investing in Castor by purchasing paid stocks. The app includes a bonus calculation system, live visual feedback, and an interactive Altair chart to show potential profit based on varying investment amounts.
 
-![Castor Logo](logo-castor-inter.png)
+![Showcase](results_example.png) - an example to show how the app looks like
 
 ---
 
@@ -53,5 +53,5 @@ The **Castor Calculator App** is a Streamlit-based web application that helps us
 
 ---
 
-## Example
-![Showcase](results_example.png) - an example to show how the app looks like
+<!-- ## Example
+![Showcase](results_example.png) - an example to show how the app looks like -->
